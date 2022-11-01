@@ -13,6 +13,7 @@ public class Drag : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Pop_Pc = Resources.Load<GameObject>("Particle/Pop_Pc");
     }
 
     void Start()
@@ -70,8 +71,10 @@ public class Drag : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Vector3 Pos = this.transform.position;
+
         if (other.CompareTag("Wall"))
-            Instantiate();
+            Instantiate(Pop_Pc, Pos, Quaternion.identity);
     }
 }
 
