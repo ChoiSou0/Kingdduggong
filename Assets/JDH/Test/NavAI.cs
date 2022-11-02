@@ -10,7 +10,7 @@ public class NavAI : MonoBehaviour
     bool CPE = false;
 
     private float RanPower;
-    [SerializeField] private float MaxPower;
+    //[SerializeField] private float MaxPower;
 
     // Use this for initialization
     public Rigidbody rb;
@@ -23,7 +23,7 @@ public class NavAI : MonoBehaviour
     private void AITurn()
     {
         RanPower = Random.Range(20, 30);
-        rb.AddForce(AI_watching.transform.forward * MaxPower, ForceMode.Impulse);
+        rb.AddForce(AI_watching.transform.forward * RanPower, ForceMode.Impulse);
     }
     // Update is called once per frame
     void Update()
