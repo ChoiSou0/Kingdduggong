@@ -5,13 +5,20 @@ using System.Threading;
 public class Drag : MonoBehaviour
 {
     [SerializeField] private float MaxPower = 20;
+    private GameObject Pop_Pc;
 
     // Use this for initialization
     public Rigidbody rb;
 
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Pop_Pc = Resources.Load<GameObject>("Particle/Pop_Pc");
+    }
+
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -25,7 +32,7 @@ public class Drag : MonoBehaviour
     }
     void OnMouseUp()
     {
-        Debug.Log("d");
+        Debug.Log("drag me down");
         float angle = 0;
         Vector3 scrSpace = Camera.main.WorldToScreenPoint(transform.position);
         Vector3 offset = new Vector3(scrSpace.x - Input.mousePosition.x, 0, scrSpace.y - Input.mousePosition.y);
@@ -64,7 +71,10 @@ public class Drag : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        Vector3 Pos = this.transform.position;
+
+        if (other.CompareTag("Wall"))
+            Instantiate(Pop_Pc, Pos, Quaternion.identity);
     }
 }
 
