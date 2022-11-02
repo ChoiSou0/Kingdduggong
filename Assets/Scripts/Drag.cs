@@ -57,7 +57,6 @@ public class Drag : MonoBehaviour
         offset.x = Mathf.Cos(Mathf.Deg2Rad * angle);
         offset.z = Mathf.Sin(Mathf.Deg2Rad * angle);
         offset *= dist;
-        Debug.Log(offset);
         offset.y = 6;
         rb.AddForce(offset * 4, ForceMode.Impulse);
         Tale_Pc.SetActive(true);
