@@ -4,6 +4,7 @@ using System.Threading;
 
 public class Drag : MonoBehaviour
 {
+    [SerializeField] private GameObject Tale_Pc;
     [SerializeField] private float MaxPower = 20;
     private GameObject Pop_Pc;
 
@@ -25,6 +26,9 @@ public class Drag : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        if (rb.velocity.x + rb.velocity.z == 0)
+            Tale_Pc.SetActive(false);
     }
     public Vector3 getVelocity()
     {
@@ -56,6 +60,7 @@ public class Drag : MonoBehaviour
         Debug.Log(offset);
         offset.y = 6;
         rb.AddForce(offset * 4, ForceMode.Impulse);
+        Tale_Pc.SetActive(true);
 
         StartCoroutine("Shoot");
 
@@ -69,12 +74,15 @@ public class Drag : MonoBehaviour
         //GameManager.allowShoot = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         Vector3 Pos = this.transform.position;
 
-        if (other.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Debug.Log("»ý¼º");
             Instantiate(Pop_Pc, Pos, Quaternion.identity);
+        }
     }
 }
 
