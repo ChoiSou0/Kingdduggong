@@ -8,6 +8,8 @@ public class BtManager : MonoBehaviour
     public GameObject Menu;
     public GameObject Title;
     public GameObject Result;
+    public GameObject LvSel;
+    public GameObject CltBt;
 
     public void StartBt()
     {
@@ -40,5 +42,17 @@ public class BtManager : MonoBehaviour
     {
         Result.SetActive(false);
         Title.SetActive(true);
+    }
+
+    public void LvSelOn()
+    {
+        LvSel.SetActive(true);
+        CltBt.SetActive(false);
+    }
+
+    public void LvSelOut()
+    {
+        LvSel.SetActive(false);
+        CltBt.SetActive(true);
     }
 }
