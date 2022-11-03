@@ -8,6 +8,8 @@ public class Drag : MonoBehaviour
     [SerializeField] private float MaxPower = 20;
     private GameObject Pop_Pc;
 
+    bool isDelay = false;
+
     // Use this for initialization
     public Rigidbody rb;
 
@@ -58,7 +60,7 @@ public class Drag : MonoBehaviour
         offset.z = Mathf.Sin(Mathf.Deg2Rad * angle);
         offset *= dist;
         offset.y = 6;
-        rb.AddForce(offset * 4, ForceMode.Impulse);
+        rb.AddForce(offset * 1, ForceMode.Impulse);
         Tale_Pc.SetActive(true);
 
         StartCoroutine("Shoot");

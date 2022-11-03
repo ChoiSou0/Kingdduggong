@@ -4,37 +4,50 @@ using UnityEngine;
 
 public class NavAI : MonoBehaviour
 {
+    public int Myturn;
     public Transform[] CheckPoint;
     public int CP = 0; //체크 포인트
     public GameObject AI_watching; // 보는애
     bool CPE = false;
+    bool isDelay = false;
+    
+    public GameObject Pop_Pc;
+    [SerializeField] private GameObject Tale_Pc;
 
     private float RanPower;
-    //[SerializeField] private float MaxPower;
-
-    // Use this for initialization
     public Rigidbody rb;
 
-    void Start()
+    private void Awake()
+    {
+        Pop_Pc = Resources.Load<GameObject>("Particle/Pop_Pc");
+    }
+
+    public void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void AITurn()
+    private void AIturn()
     {
-        RanPower = Random.Range(20, 30);
+        RanPower = Random.Range(20, 40);
         rb.AddForce(AI_watching.transform.forward * RanPower, ForceMode.Impulse);
+        if (TurnManager.P_num >= Myturn)
+        {
+            TurnManager.P_num = TurnManager.P_num + 1;
+        }
+        if (TurnManager.P_num >= 4)
+        {
+            TurnManager.P_num = 0;
+        }
     }
     // Update is called once per frame
     void Update()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
-
         AI_watching.transform.LookAt(CheckPoint[CP]);
-        if (Input.GetKeyDown(KeyCode.A))
+        if (TurnManager.P_num == Myturn)
         {
-            AITurn();
-            Debug.Log("d");
+            AIturn();
         }
     }
     public Vector3 getVelocity()
@@ -125,6 +138,16 @@ public class NavAI : MonoBehaviour
             CP = 1;
         }*/
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Vector3 Pos = this.transform.position;
+
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            Instantiate(Pop_Pc, Pos, Quaternion.identity);
+        }
     }
 }
 
