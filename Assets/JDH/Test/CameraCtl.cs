@@ -9,6 +9,7 @@ public class CameraCtl : MonoBehaviour
 
     void LateUpdate()
     {
+
         transform.position = _player[TurnManager.P_num].transform.position + _delta;
         transform.LookAt(_player[TurnManager.P_num].transform);
     }

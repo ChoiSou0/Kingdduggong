@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     //아직 안함
-    public static int P_num;//턴 순서
+    [SerializeField]public static int P_num = 0;//턴 순서
 
+    
 }

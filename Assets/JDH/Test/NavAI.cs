@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NavAI : MonoBehaviour
+public class NavAI : TurnManager
 {
     public int Myturn;
     public Transform[] CheckPoint;
@@ -31,13 +31,13 @@ public class NavAI : MonoBehaviour
     {
         RanPower = Random.Range(20, 40);
         rb.AddForce(AI_watching.transform.forward * RanPower, ForceMode.Impulse);
-        if (TurnManager.P_num >= Myturn)
+        if (P_num >= Myturn)
         {
-            TurnManager.P_num = TurnManager.P_num + 1;
+            P_num = P_num + 1;
         }
-        if (TurnManager.P_num >= 4)
+        if (P_num >= 4)
         {
-            TurnManager.P_num = 0;
+            P_num = 0;
         }
     }
     // Update is called once per frame
@@ -45,7 +45,7 @@ public class NavAI : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         AI_watching.transform.LookAt(CheckPoint[CP]);
-        if (TurnManager.P_num == Myturn)
+        if (P_num == Myturn)
         {
             AIturn();
         }

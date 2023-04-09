@@ -8,10 +8,11 @@ public class GameManager : MonoBehaviour {
 	void Start(){
 		player1Turn ();
 	}
-	void Update(){/*
-		if(Input.GetKey(KeyCode.Space))
-			Application.LoadLevel ("Play");*/
-	}
+	void Update()
+    {
+        /*if (Input.GetKey(KeyCode.Space))
+            Application.LoadLevel("Play");*/
+    }
 	public void player1Turn(){
 		transform.position = new Vector3 (0, 300, -500);
 		transform.rotation = Quaternion.Euler (30, 0, 0);
